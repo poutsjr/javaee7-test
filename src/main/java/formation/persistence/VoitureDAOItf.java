@@ -17,7 +17,7 @@ public interface VoitureDAOItf {
      *
      * @return a set of voiture
      */
-    public List<Voiture> findAll();
+    List<Voiture> findAll();
 
 
     /**
@@ -26,5 +26,13 @@ public interface VoitureDAOItf {
      * @param voiture The voiture to create.
      * @return the new voiture.
      */
-    public Voiture create(Voiture voiture);
+    Voiture create(Voiture voiture) throws Exception;
+
+    /**
+     * Find a voiture with the given identifier
+     *
+     * @param id The id of the voiture
+     * @return The found voiture or null if not found
+     */
+    Voiture find(Long id);
 }

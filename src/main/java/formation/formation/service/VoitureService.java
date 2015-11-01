@@ -6,15 +6,19 @@ import formation.persistence.VoitureDAOItf;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
 /**
- * Created by poutsjr on 30/09/2015.
+ * Default implementation for managing voiture
  */
 @Remote
 @Stateless
 public class VoitureService implements VoitureServiceItf{
 
+    /**
+     * Allow to manage voiture persistence
+     */
     @EJB
     VoitureDAOItf dao;
 
@@ -24,10 +28,15 @@ public class VoitureService implements VoitureServiceItf{
     }
 
     @Override
-    public Voiture create(Voiture voiture) {
+    public Voiture create(Voiture voiture) throws Exception {
         //FIXME validate voiture
         Voiture v =  dao.create(voiture);
         return v;
+    }
+
+    @Override
+    public Voiture get(Long id) {
+        return dao.find(id);
     }
 
 

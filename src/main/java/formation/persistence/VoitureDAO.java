@@ -1,25 +1,27 @@
 package formation.persistence;
 
 import formation.domain.Voiture;
+import sun.security.validator.ValidatorException;
 
-import javax.ejb.Local;
-import javax.ejb.LocalBean;
-import javax.ejb.Remote;
-import javax.ejb.Stateless;
+import javax.ejb.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import java.util.List;
 
 /**
- * Created by poutsjr on 30/09/2015.
+ * DAO Implementation for voiture
  */
 @Local
 @Stateless
 public class VoitureDAO implements VoitureDAOItf {
 
+    /**
+     * EntityManager of DAO
+     */
     @PersistenceContext(unitName = "vraitest")
     private EntityManager em;
 
@@ -30,16 +32,21 @@ public class VoitureDAO implements VoitureDAOItf {
     }
 
     @Override
-    public Voiture create(Voiture voiture) {
+    public Voiture create(Voiture voiture) throws Exception{
         //TODO manage transaction ??
         try {
             em.persist(voiture);
         } catch (ConstraintViolationException e) {
             for (ConstraintViolation<?> constraintViolation : e.getConstraintViolations()) {
-                throw new IllegalArgumentException(constraintViolation.getMessage(), e);
+                throw new Exception(constraintViolation.getMessage(), e);
             }
 
         }
             return voiture;
+    }
+
+    @Override
+    public Voiture find(Long id) {
+        return em.find(Voiture.class, id);
     }
 }

@@ -1,7 +1,6 @@
 package formation.service;
 
 import formation.domain.Voiture;
-import formation.formation.service.VoitureService;
 import formation.formation.service.VoitureServiceItf;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -17,7 +16,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 /**
- * Created by poutsjr on 30/09/2015.
+ * Testing Remote service for voiture.
  */
 public class VoitureServiceTest {
 
@@ -44,7 +43,7 @@ public class VoitureServiceTest {
     }
 
     @Test
-    public void validCase_createVoiture() throws NamingException {
+    public void validCase_createVoiture() throws Exception {
         Object ejb = ctx.lookup("java:global/vrai-test-1.0.0-SNAPSHOT/VoitureService");
         assertNotNull(ejb);
 

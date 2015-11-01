@@ -2,9 +2,10 @@ package formation.formation.service;
 
 import formation.domain.Voiture;
 
+import javax.ws.rs.core.Response;
+
 /**
  * Service for managing voiture.
- * Created by poutsjr on 30/09/2015.
  */
 public interface VoitureServiceItf {
 
@@ -13,7 +14,7 @@ public interface VoitureServiceItf {
      *
      * @return le nombre de voiture.
      */
-    public int total();
+    int total();
 
     /**
      * Create a new voiture.
@@ -21,5 +22,12 @@ public interface VoitureServiceItf {
      * @param voiture The voiture to create.
      * @return The created voiture.
      */
-    public Voiture create(Voiture voiture);
+    Voiture create(Voiture voiture) throws Exception;
+
+    /**
+     * Return the voiture with the given identifier
+     * @param id the identifier of the voiture
+     * @return  The found voiture or null if not found.
+     */
+    Voiture get(Long id);
 }
